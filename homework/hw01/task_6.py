@@ -10,7 +10,7 @@ import chardet
 
 my_list = ['сетевое программирование', 'сокет', 'декоратор']
 
-with open ('test_file.txt', 'w') as file:
+with open('test_file.txt', 'w') as file:
     for i in my_list:
         file.write(f'{i}\n')
 file.close()

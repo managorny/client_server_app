@@ -1,0 +1,9 @@
+items:
+- phone
+- laptop
+- ears
+items_quantity: 32
+items_ptice:
+  phone: 100€
+  laptop: 1200€
+  ears: 70€
