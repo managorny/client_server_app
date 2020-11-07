@@ -7,33 +7,23 @@ from common.default_conf import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, \
     RESPONSE, ERROR, DEFAULT_IP_ADDRESS, DEFAULT_PORT
 from common.utils import get_message, send_message
 
-action = ACTION
-presence = PRESENCE
-time_msg = TIME
-user = USER
-account_name_msg = ACCOUNT_NAME
-response = RESPONSE
-error = ERROR
-default_ip_address = DEFAULT_IP_ADDRESS
-default_port = DEFAULT_PORT
-
 
 def create_presence_message(account_name='Demo'):
     presence_message = {
-        action: presence,
-        time_msg: time.time(),
-        user: {
-            account_name_msg: account_name
+        ACTION: PRESENCE,
+        TIME: time.time(),
+        USER: {
+            ACCOUNT_NAME: account_name
         }
     }
     return presence_message
 
 
 def get_answer(message):
-    if response in message:
-        if message[response] == 200:
+    if RESPONSE in message:
+        if message[RESPONSE] == 200:
             return '200 : OK'
-        return f'400 : {message[error]}'
+        return f'400 : {message[ERROR]}'
     raise ValueError
 
 
