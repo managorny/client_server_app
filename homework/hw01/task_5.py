@@ -1,6 +1,9 @@
 """
-5. Выполнить пинг веб-ресурсов yandex.ru, youtube.com
- и преобразовать результаты из байтовового в строковый тип на кириллице.
+5. Выполнить пинг веб-ресурсов yandex.ru, youtube.com и
+преобразовать результаты из байтовового в строковый тип на кириллице.
+
+Подсказки:
+--- используйте модуль chardet
 """
 
 import subprocess
@@ -16,10 +19,12 @@ for direct in direct_list:
             break
         else:
             identify = chardet.detect(i)
-            x = list(identify.values())
-            interm_res = i.decode(f'{x[0]}').encode('utf-8')
-            # interm_res = i.decode(identify['encoding']).encode('utf-8')
+            interm_res = i.decode(identify['encoding']).encode('utf-8')
+
+            # second variant
+            # x = list(identify.values())
+            # print(x)
+            # interm_res = i.decode(f'{x[0]}').encode('utf-8')
 
             print(interm_res.decode('utf-8'))
             z += 1
-
