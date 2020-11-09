@@ -2,7 +2,7 @@ import time
 import os
 from subprocess import Popen
 
-CHOICE_TEXT = """
+text_for_choice = """
 1 - запуск сервера
 2 - остановка сервера
 3 - запуск 4 клиентов
@@ -17,7 +17,7 @@ path_to_script_server = os.path.join(path_to_file, "server.py")
 path_to_script_client = os.path.join(path_to_file, "client.py")
 
 while True:
-    choice = input(CHOICE_TEXT)
+    choice = input(text_for_choice)
 
     if choice == '1':
         print("Запустили сервер")

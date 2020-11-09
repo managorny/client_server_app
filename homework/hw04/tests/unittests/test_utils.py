@@ -8,16 +8,6 @@ from common.default_conf import RESPONSE, ERROR, USER, ACCOUNT_NAME, TIME, ACTIO
 from common.utils import get_message, send_message
 
 
-action = ACTION
-presence = PRESENCE
-time_msg = TIME
-user = USER
-account_name_msg = ACCOUNT_NAME
-response = RESPONSE
-error = ERROR
-encoding = ENCODING
-
-
 class TestSocket:
     def __init__(self, test_dict):
         self.test_dict = test_dict
@@ -29,7 +19,7 @@ class TestSocket:
         self.encoded_message = json_test_message.encode(ENCODING)
         self.received_message = message_to_send
 
-    def receive(self, max_pkg_len):
+    def recv(self, max_pkg_len):
         json_test_message = json.dumps(self.test_dict)
         return json_test_message.encode(ENCODING)
 
@@ -37,17 +27,17 @@ class TestSocket:
 class TestUtils(unittest.TestCase):
 
     test_dict_send = {
-        action: presence,
-        time_msg: 1233.1233,
-        user: {
-            account_name_msg: 'Demo_test'
+        ACTION: PRESENCE,
+        TIME: 1233.1233,
+        USER: {
+            ACCOUNT_NAME: 'Demo_test'
         }
     }
 
-    test_dict_receive_ok = {response: 200}
+    test_dict_receive_ok = {RESPONSE: 200}
     test_dict_receive_error = {
-        response: 400,
-        error: 'Bad Request'
+        RESPONSE: 400,
+        ERROR: 'Bad Request'
     }
 
     def test_send_message(self):

@@ -24,5 +24,6 @@ with open('file.yaml', 'w', encoding='utf-8') as file:
 
 with open("file.yaml", 'r', encoding='utf-8') as file:
     data_new = yaml.load(file, Loader=yaml.SafeLoader)
+    # data_new = yaml.load(file, Loader=yaml.FullLoader)
 
 print(data == data_new)

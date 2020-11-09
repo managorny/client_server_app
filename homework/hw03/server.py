@@ -8,25 +8,14 @@ from common.default_conf import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, \
     RESPONSE, ERROR, DEFAULT_IP_ADDRESS, DEFAULT_PORT, MAX_CONNECTIONS
 from common.utils import get_message, send_message
 
-action = ACTION
-presence = PRESENCE
-time_msg = TIME
-user = USER
-account_name_msg = ACCOUNT_NAME
-response = RESPONSE
-error = ERROR
-default_ip_address = DEFAULT_IP_ADDRESS
-default_port = DEFAULT_PORT
-max_connections = MAX_CONNECTIONS
-
 
 def process_client_message(message):
-    if action in message and message[action] == presence and time_msg in message \
-            and user in message and message[user][account_name_msg] == 'Demo':
-        return {response: 200}
+    if ACTION in message and message[ACTION] == PRESENCE and TIME in message \
+            and USER in message and message[USER][ACCOUNT_NAME] == 'Demo':
+        return {RESPONSE: 200}
     return {
-        response: 400,
-        error: 'Bad Request'
+        RESPONSE: 400,
+        ERROR: 'Bad Request'
     }
 
 
@@ -37,7 +26,7 @@ def load_params():
         if '-p' in sys.argv:
             listen_port = int(sys.argv[sys.argv.index('-p') + 1])
         else:
-            listen_port = default_port
+            listen_port = DEFAULT_PORT
         if listen_port < 1024 or listen_port > 65535:
             raise ValueError
     except IndexError:
@@ -53,7 +42,7 @@ def load_params():
         if '-address' in sys.argv:
             listen_address = sys.argv[sys.argv.index('-address') + 1]
         else:
-            listen_address = default_ip_address
+            listen_address = DEFAULT_IP_ADDRESS
 
     except IndexError:
         print(
@@ -70,7 +59,7 @@ def make_sock_get_msg_send_answer():
     sock.bind(load_params())
 
     # Слушаем порт
-    sock.listen(max_connections)
+    sock.listen(MAX_CONNECTIONS)
 
     while True:
         client, client_address = sock.accept()
