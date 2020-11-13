@@ -14,7 +14,7 @@ path_file = os.path.join(path_dir, path_dir_files_logs, 'server.log')
 # создаем логгер, его уровень и формат
 logger = logging.getLogger('messengerapp_server')
 logger.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(name)s - %(message)s')
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s - %(name)s - %(message)s')
 
 # хэндлер в файл
 file_handler = logging.handlers.TimedRotatingFileHandler(path_file, encoding='utf-8', when='D', interval=1)

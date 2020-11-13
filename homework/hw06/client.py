@@ -15,6 +15,7 @@ logger = logging.getLogger('messengerapp_client')
 # stream_handler.setLevel(logging.INFO)   # - для теста в консоли.
 
 
+@log
 def create_presence_message(account_name='Demo'):
     presence_message = {
         ACTION: PRESENCE,
@@ -30,11 +31,16 @@ def create_presence_message(account_name='Demo'):
 def get_answer(message):
     if RESPONSE in message:
         if message[RESPONSE] == 200:
-            return '200 : OK'
-        return logger.error(f'400 : {message[ERROR]}')
+            answer = '200 : OK'
+            logger.info(answer)
+            return answer
+        error = f'400 : {message[ERROR]}'
+        logger.info(error)
+        return error
     raise logger.error(ValueError)
 
 
+@log
 def load_params():
     try:
         server_address = sys.argv[1]
@@ -61,8 +67,7 @@ def make_sock_send_msg_get_answer():
     send_message(sock, message_to_server)
 
     try:
-        answer = get_answer(get_message(sock))
-        # logger.info(answer) # есть декоратор над функцией get_answer
+        get_answer(get_message(sock))
     except (ValueError, json.JSONDecodeError):
         logger.error('Не удалось декодировать сообщение сервера.')
 

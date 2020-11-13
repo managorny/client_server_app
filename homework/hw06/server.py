@@ -4,6 +4,8 @@ import json
 import logs.log_configs.server_log_config
 import logging
 # from logs.log_configs.server_log_config import stream_handler # - для теста в консоли.
+from decorators import log
+
 
 from common.default_conf import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, \
     RESPONSE, ERROR, DEFAULT_IP_ADDRESS, DEFAULT_PORT, MAX_CONNECTIONS
@@ -13,16 +15,22 @@ logger = logging.getLogger('messengerapp_server')
 # stream_handler.setLevel(logging.INFO)   # - для теста в консоли.
 
 
+@log
 def process_client_message(message):
     if ACTION in message and message[ACTION] == PRESENCE and TIME in message \
             and USER in message and message[USER][ACCOUNT_NAME] == 'Demo':
-        return {RESPONSE: 200}
-    return {
+        answer = {RESPONSE: 200}
+        logger.info(answer)
+        return answer
+    error = {
         RESPONSE: 400,
         ERROR: 'Bad Request'
     }
+    logger.info(error)
+    return error
 
 
+@log
 def load_params():
 
     # валидация и загрузка порта
